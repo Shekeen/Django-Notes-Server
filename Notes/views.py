@@ -1,13 +1,11 @@
-from rest_framework import authentication, generics, permissions
+from rest_framework import generics, permissions
 from oauth2_provider.ext.rest_framework import TokenHasScope
-from Notes.models import Note
-from Notes.serializers import NoteSerializer
-from Notes.permissions import IsOwner
+from .models import Note
+from .serializers import NoteSerializer
 
 
 class NoteList(generics.ListCreateAPIView):
     serializer_class = NoteSerializer
-    authentication_classes = (authentication.oauth2_provider,)
     permission_classes = (permissions.IsAuthenticated, TokenHasScope,)
     required_scopes = ('notes',)
 
@@ -20,8 +18,7 @@ class NoteList(generics.ListCreateAPIView):
 
 class NoteDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = NoteSerializer
-    authentication_classes = (authentication.oauth2_provider,)
-    permission_classes = (permissions.IsAuthenticated, IsOwner, TokenHasScope,)
+    permission_classes = (permissions.IsAuthenticated, TokenHasScope,)
     required_scopes = ('notes',)
 
     def pre_save(self, obj):

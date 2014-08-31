@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Notes.models import Note
+from .models import Note
 
 
 class NoteSerializer(serializers.ModelSerializer):
@@ -7,5 +7,5 @@ class NoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Note
-        fields = ('id', 'author', 'text', 'add_time', 'last_update',)
+        fields = ('text', 'add_time', 'last_update',)
         read_only_fields = ('add_time', 'last_update',)
