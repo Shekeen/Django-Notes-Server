@@ -3,11 +3,13 @@ from django.contrib import admin
 import Notes.urls
 
 
+admin.autodiscover()
+
 urlpatterns = patterns('',
     url(r'^notes/', include(Notes.urls)),
     url(r'^admin/', include(admin.site.urls)),
 )
 
 urlpatterns += patterns('',
-    url(r'^oauth2/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    url(r'^oauth2/', include('provider.oauth2.urls', namespace='oauth2')),
 )
